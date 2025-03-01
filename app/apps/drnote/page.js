@@ -13,6 +13,7 @@ export default function DrNoteHomePage() {
         title="DrNote"
         subtitle="Medical test prep made easy"
       />
+      <h1> hi drnote</h1>
       <Footer />
     </main>
   );
