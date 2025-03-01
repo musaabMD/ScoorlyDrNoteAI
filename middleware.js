@@ -1,22 +1,39 @@
-// middleware.js (no changes needed if you already implemented it)
+// middleware.js
 import { NextResponse } from 'next/server';
 import { updateSession } from "@/libs/supabase/middleware";
 
 export async function middleware(request) {
-  // Auth handling first
+  // First, handle auth
   const authResponse = await updateSession(request);
   
-  // Domain-based routing
   const url = request.nextUrl;
   const hostname = request.headers.get('host');
+  const path = url.pathname;
   
-  // Root path handling
-  if (url.pathname === '/') {
+  // If accessing the root path
+  if (path === '/') {
     if (hostname.includes('drnote.co')) {
-      return NextResponse.redirect(new URL('/apps/drnote', request.url));
+      // Rewrite to drnote content but keep the URL as root
+      return NextResponse.rewrite(new URL('/apps/drnote', request.url));
     } else {
-      return NextResponse.redirect(new URL('/apps/scoorly', request.url));
+      // Default to scoorly but keep the URL as root
+      return NextResponse.rewrite(new URL('/apps/scoorly', request.url));
     }
+  }
+  
+  // For path-based access, handle sub-pages
+  if (path.startsWith('/apps/')) {
+    // This allows direct access to /apps/... paths for development
+    return authResponse;
+  }
+  
+  // For all other paths, rewrite based on domain
+  if (hostname.includes('drnote.co')) {
+    // Keep the path but serve from drnote content
+    return NextResponse.rewrite(new URL(`/apps/drnote${path}`, request.url));
+  } else {
+    // Keep the path but serve from scoorly content
+    return NextResponse.rewrite(new URL(`/apps/scoorly${path}`, request.url));
   }
   
   return authResponse;
