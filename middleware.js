@@ -1,43 +1,25 @@
-// import { updateSession } from "@/libs/supabase/middleware";
-
-// export async function middleware(request) {
-//   return await updateSession(request);
-// }
-
-// export const config = {
-//   matcher: [
-//     /*
-//      * Match all request paths except for the ones starting with:
-//      * - _next/static (static files)
-//      * - _next/image (image optimization files)
-//      * - favicon.ico (favicon file)
-//      * Feel free to modify this pattern to include more paths.
-//      */
-//     "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
-//   ],
-// };
-import { updateSession } from "@/libs/supabase/middleware";
+// middleware.js (no changes needed if you already implemented it)
 import { NextResponse } from 'next/server';
+import { updateSession } from "@/libs/supabase/middleware";
 
 export async function middleware(request) {
-  // First, update Supabase session
-  const response = await updateSession(request);
+  // Auth handling first
+  const authResponse = await updateSession(request);
   
-  // If the user is trying to access the root, redirect based on hostname
+  // Domain-based routing
   const url = request.nextUrl;
+  const hostname = request.headers.get('host');
+  
+  // Root path handling
   if (url.pathname === '/') {
-    const hostname = request.headers.get('host');
-    
     if (hostname.includes('drnote.co')) {
-      // Rewrite to drnote
-      return NextResponse.rewrite(new URL('/apps/drnote', request.url));
+      return NextResponse.redirect(new URL('/apps/drnote', request.url));
     } else {
-      // Default to scoorly
-      return NextResponse.rewrite(new URL('/apps/scoorly', request.url));
+      return NextResponse.redirect(new URL('/apps/scoorly', request.url));
     }
   }
   
-  return response;
+  return authResponse;
 }
 
 export const config = {

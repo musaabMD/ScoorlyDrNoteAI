@@ -1,10 +1,19 @@
-import Link from "next/link";
-import ButtonSignin from "@/components/ButtonSignin";
+// app/apps/drnote/page.js
+import Link from 'next/link';
+import ButtonSignin from '@/components/ButtonSignin';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Footer from '@/components/Footer';
 
-export default function Page() {
+export default function DrNoteHomePage() {
   return (
-    <>
-   <h1> hi drnote</h1>
-    </>
+    <main>
+      <Header />
+      <Hero
+        title="DrNote"
+        subtitle="Medical test prep made easy"
+      />
+      <Footer />
+    </main>
   );
 }
