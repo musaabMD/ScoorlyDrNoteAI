@@ -5,7 +5,6 @@ import { usePathname, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import ButtonSignin from "./ButtonSignin";
-import config from "@/config";
 
 const Header = () => {
   const pathname = usePathname();

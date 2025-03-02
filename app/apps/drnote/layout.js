@@ -1,5 +1,5 @@
 // app/apps/drnote/layout.js
-import config from "@/config";
+import { Suspense } from 'react'
 import { getSEOTags } from "@/libs/seo";
 import ClientWrapper from "@/components/ClientWrapper";
 import ClientLayout from "@/components/LayoutClient";

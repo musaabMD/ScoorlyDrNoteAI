@@ -1,8 +1,7 @@
 // components/ClientWrapper.js
 "use client";
 
-import { usePathname } from "next/navigation";
-import NextTopLoader from "nextjs-toploader";
+import { Suspense } from 'react'
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
 import config from "@/config";
