@@ -8,6 +8,7 @@ import Image from "next/image";
 import ButtonSignin from "./ButtonSignin";
 import config from "@/config";
 
+
 const links = [
   { href: "/#pricing", label: "Pricing" },
   { href: "/#testimonials", label: "Reviews" },

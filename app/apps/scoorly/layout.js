@@ -1,24 +1,24 @@
 // app/apps/scoorly/layout.js
 import config from "@/config";
 import { getSEOTags } from "@/libs/seo";
-import ClientWrapper from "@/components/ClientLayoutWrapper";
+import ClientWrapper from "@/components/ClientWrapper";
+import ClientLayout from "@/components/LayoutClient";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 
 export const metadata = getSEOTags({
   title: 'Scoorly - Test Prep Platform',
-  // Add other metadata
 });
 
 export default function ScoorlyLayout({ children }) {
   return (
-    <>
-      <ClientWrapper />
-      <div data-theme={config.colors.theme}>
+    <div className="scoorly-layout">
+      <ClientLayout>
+        <ClientWrapper />
         <Header />
         <main>{children}</main>
         <Footer />
-      </div>
-    </>
+      </ClientLayout>
+    </div>
   );
 }
