@@ -18,13 +18,14 @@
 //     </main>
 //   );
 // }
-import { ClientSuspense } from "@/components/ClientLayoutWrapper";
+// app/apps/drnote/page.js
+import { Suspense } from 'react';
 import HomeContent from "@/components/HomeContent";
 
 export default function HomePage() {
   return (
-    <ClientSuspense>
+    <Suspense fallback={<div>Loading...</div>}>
       <HomeContent />
-    </ClientSuspense>
+    </Suspense>
   );
 }
