@@ -1,9 +1,9 @@
 // components/ClientWrapper.js
 "use client";
 
-import { Suspense } from 'react'
 import { Toaster } from "react-hot-toast";
 import { Tooltip } from "react-tooltip";
+import NextTopLoader from 'nextjs-toploader';
 import config from "@/config";
 
 export default function ClientWrapper() {
